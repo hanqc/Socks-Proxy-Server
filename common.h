@@ -5,8 +5,10 @@
 #include <stdarg.h>
 #include <string.h>
 #include <errno.h>
-
+#include <map>
 #include <iostream>
+#include <assert.h>
+#include <netdb.h>
 using namespace std;
 
 #include <sys/types.h> 

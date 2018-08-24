@@ -26,6 +26,34 @@ public:
 			ErrorLog("epoll_ctl(op:%d,fd:%d)",op,fd);
 		}
 	}
+	//TODO
+	void SetNonblocking(int fd)
+	{
+		
+	}
+	enum Scoks5State
+	{
+		AUTH,
+		ESTABLISHMENT,
+		FORWARDING,
+	};
+	struct Channel
+	{
+		int _fd;//描述符
+
+		Channel()
+			:_fd(-1)
+		{}
+	};
+	struct Connect
+	{
+		Scoks5State _state;
+		Channel _clientChannel;
+		Channel _serverChannel;
+		Connect()
+			:_state(AUTH)
+		{}
+	};
 	void Start();
 	void EventLoop();
 	//多态实现的虚函数
@@ -36,6 +64,8 @@ protected:
 	int _port;//端口 
 	int _listenfd;//监听描述符
 	int _eventfd;//时间描述符
+
+	map<int,Connect*> _fdConnectMap;//fd映射连接的map容器
 
 };
 
